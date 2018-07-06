@@ -53,12 +53,19 @@ class NewVisitorTest(LiveServerTestCase):
         ## we use a new browser dialog
         ## the first user's information will not leak from the cookie
         self.browser.quit()
+
+        #another new process
         self.browser = webdriver.Firefox()
+        self.browser.get(self.live_server_url)
+        page_text = self.browser.find_element_by_tag_name('body').text
+        self.assertNotIn('Buy peacock feathers', page_text)
+        self.assertNotIn('make a fly', page_text)
 
         # he inputs a new to-do item and create a list
         inputbox = self.browser.find_element_by_id('id_new_item')
         inputbox.send_keys('Buy milk')
         inputbox.send_keys(Keys.ENTER)
+        time.sleep(3)
 
         #he gets the unique URL
         francis_list_url = self.browser.current_url
