@@ -45,9 +45,10 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox.send_keys('Use peacock feathers to make a fly')
         inputbox.send_keys(Keys.ENTER)
         time.sleep(3)
-
-        self.check_for_row_in_list_table('1: Buy peacock feathers')
+        
         self.check_for_row_in_list_table('2: Use peacock feathers to make a fly')
+        self.check_for_row_in_list_table('1: Buy peacock feathers')
+        
         
         #a new user visits the website
         ## we use a new browser dialog
@@ -81,9 +82,7 @@ class NewVisitorTest(LiveServerTestCase):
 
 
 
-        self.fail('Finish the test')
+        #self.fail('Finish the test')
         #She visits the URL and the TO-DO list is there
 
-# if __name__ == '__main__':
-#     unittest.main()
 
