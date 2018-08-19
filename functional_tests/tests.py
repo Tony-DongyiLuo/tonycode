@@ -1,5 +1,7 @@
 #from django.test import LiveServerTestCase
+import sys
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+#from django.test.testcases import LiveServerThread,_StaticFilesHandler
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 #import unittest
@@ -7,6 +9,16 @@ import time
 
 class NewVisitorTest(StaticLiveServerTestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        
+        super().setUpClass()
+    
+    @classmethod
+    def tearDownClass(cls):
+        
+        super().tearDownClass() 
+    
     def setUp(self):
         self.browser = webdriver.Firefox()
         self.browser.implicitly_wait(3)
@@ -79,8 +91,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         page_text = self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('Buy peacock feathers', page_text)
         self.assertIn('Buy milk', page_text)
-        
-        #self.fail('Finish the test')
+         
         
     def test_layout_and_styling(self):
         #She visits the URL and the TO-DO list is there
@@ -89,12 +100,8 @@ class NewVisitorTest(StaticLiveServerTestCase):
         
 
         #She sees the input box that is centralized displayed
-        #inputbox.send_keys('testing\n')
         inputbox = self.browser.find_element_by_id('id_new_item')
-        # inputbox.send_keys('testing')
-        # inputbox.send_keys(Keys.ENTER)
-        # time.sleep(2)
-        # inputbox = self.browser.find_element_by_id('id_new_item')
+        
         self.assertAlmostEqual(inputbox.location['x'] + inputbox.size['width'] / 2, 
         512, delta=5)
 
