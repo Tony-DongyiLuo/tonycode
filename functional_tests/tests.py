@@ -11,7 +11,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
     @classmethod
     def setUpClass(cls):
-        
+        cls.live_server_url = 'http://www.tonycodetest.site'
         super().setUpClass()
     
     @classmethod
