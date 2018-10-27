@@ -20,7 +20,10 @@ class NewVisitorTest(StaticLiveServerTestCase):
         super().tearDownClass() 
     
     def setUp(self):
-        self.browser = webdriver.Firefox()
+        self.opts = webdriver.FirefoxOptions()
+        self.opts.add_argument("--headless")
+
+        self.browser = webdriver.Firefox(firefox_options=self.opts)
         self.browser.implicitly_wait(3)
     
     def tearDown(self):
@@ -69,7 +72,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.browser.quit()
 
         #another new process
-        self.browser = webdriver.Firefox()
+        self.browser = webdriver.Firefox(firefox_options=self.opts)
         self.browser.get(self.live_server_url)
         page_text = self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('Buy peacock feathers', page_text)
