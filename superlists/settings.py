@@ -24,9 +24,9 @@ BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 SECRET_KEY = '!bw3i@fb_b=*(m%#&2qd^@i!xk4vzbq!jc!1ev0y9bn#s+(uwi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.tonycodetest.site']
 
 
 # Application definition
