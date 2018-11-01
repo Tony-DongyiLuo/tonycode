@@ -1,0 +1,21 @@
+#Nginx Test Configuration File
+server{
+    listen 80;
+    #listen [::]:80;
+
+    server_name SITE;
+    #server_name _;
+    
+    #CSS File
+    location /static/ {
+        alias /home/tony/sites/SITE/static/;
+    }
+
+    #Pass the request to local port 8000
+    location / {
+        proxy_set_header Host $host;
+        proxy_pass http://unix:/tmp/SITE.socket;
+        #proxy_pass http://localhost:8000;
+        #try_files $uri $uri/ =404;
+    }
+}
