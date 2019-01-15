@@ -9,9 +9,9 @@ class ItemValidationTest(FunctionalTest):
     def test_cannot_add_empty_list_items(self):
         #The user submits an empty list item
         self.browser.get(self.live_server_url)
-        #self.browser.find_element_by_id('id_new_item').send_keys('')
-        self.browser.find_element_by_id('id_new_item').send_keys(Keys.ENTER)
-        time.sleep(30)
+        self.browser.find_element_by_id('id_new_item').send_keys('\n')
+        #self.browser.find_element_by_id('id_new_item').send_keys(Keys.ENTER)
+        time.sleep(5)
         print(self.browser.find_element_by_css_selector('.form-control').text + 'ErrorPrint')
 
         #The error message shows the list item cannot be empty
