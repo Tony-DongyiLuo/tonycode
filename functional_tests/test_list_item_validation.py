@@ -1,7 +1,7 @@
 from unittest import skip
 from .base import FunctionalTest
-
-
+from selenium.webdriver.common.keys import Keys
+import time
 
 class ItemValidationTest(FunctionalTest):
     
@@ -9,10 +9,13 @@ class ItemValidationTest(FunctionalTest):
     def test_cannot_add_empty_list_items(self):
         #The user submits an empty list item
         self.browser.get(self.live_server_url)
-        self.browser.find_element_by_id('id_new_item').send_keys('\n')
+        #self.browser.find_element_by_id('id_new_item').send_keys('')
+        self.browser.find_element_by_id('id_new_item').send_keys(Keys.ENTER)
+        time.sleep(30)
+        print(self.browser.find_element_by_css_selector('.form-control').text + 'ErrorPrint')
 
         #The error message shows the list item cannot be empty
-        error = self.browser.find_element_by_css_selector('.has_error')
+        error = self.browser.find_element_by_css_selector('.has-error')
         self.assertEqual(error.text, "You can't have an empty list item")
 
         #The user submits a normal list item and it works
@@ -24,7 +27,7 @@ class ItemValidationTest(FunctionalTest):
 
         #The user sees the error message again
         self.check_for_row_in_list_table('1: Buy milk')
-        error = self.browser.find_element_by_css_selector('.has_error')
+        error = self.browser.find_element_by_css_selector('.has-error')
         self.assertEqual(error.text, "You can't have an empty list item")
 
         #Input the characters and it works
