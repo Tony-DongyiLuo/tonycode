@@ -23,7 +23,7 @@ class NewVisitorTest(FunctionalTest):
 
         #Press Enter button and the page refreshes
         inputbox.send_keys(Keys.ENTER)
-        time.sleep(2)
+        time.sleep(5)
         edith_list_url = self.browser.current_url
         self.assertRegex(edith_list_url, '/lists/.+')
         self.check_for_row_in_list_table('1: Buy peacock feathers')
