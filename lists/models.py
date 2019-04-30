@@ -7,6 +7,6 @@ class List(models.Model):
         return reverse('view_list', args=[self.id])
 
 class Item(models.Model):
-    text = models.TextField(default='')
+    text = models.TextField(default='',null=False)
     list = models.ForeignKey(List, default=None, on_delete=models.CASCADE)
 
