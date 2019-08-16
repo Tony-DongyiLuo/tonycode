@@ -40,5 +40,21 @@ class ItemValidationTest(FunctionalTest):
         time.sleep(5)
         self.check_for_row_in_list_table('1: Buy milk')
         self.check_for_row_in_list_table('2: Make tea')
+    
+    def test_cannot_add_duplicate_items(self):
+        self.browser.get(self.live_server_url)
+        self.get_item_input_box().send_keys('Buy wellies')
+        self.get_item_input_box().send_keys(Keys.ENTER)
+        self.check_for_row_in_list_table('1: Buy wellies')
+
+        #input duplicate item
+        self.get_item_input_box().send_keys('Buy wellies')
+        self.get_item_input_box().send_keys(Keys.ENTER)
+
+        #an error message is pop-out
+        self.check_for_row_in_list_table('1: Buy wellies')
+        error = self.browser.find_element_by_css_selector('.has-error')
+        self.assertEqual(error.text, "You've already got this in your list")
+
 
 
